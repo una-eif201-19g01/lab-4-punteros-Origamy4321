@@ -31,41 +31,42 @@ class Empleado {
 private:
 
 protected:
-    string *empleado;
-    int *iD;
-    int *annoExp;
-    float *salarioBase;
-    bool *banderaRev;
+    string empleado;
+    int iD;
+    int annoExp;
+    float salarioBase;
+    bool banderaRev;
 public:
+
     Empleado();
 
-    Empleado(string *empleado, int *iD, int *annoExp, float *salarioBase, bool *banderaRev);
+    Empleado(const string &empleado, int iD, int annoExp, float salarioBase, bool banderaRev);
 
-    string *getEmpleado() const;
+    const string &getEmpleado() const;
 
-    int *getId() const;
+    void setEmpleado(const string &empleado);
 
-    int *getAnnoExp() const;
+    int getId() const;
 
-    float *getSalarioBase() const;
+    void setId(int iD);
 
-    bool *getBanderaRev() const;
+    int getAnnoExp() const;
 
-    void setEmpleado(string *empleado);
+    void setAnnoExp(int annoExp);
 
-    void setId(int *iD);
+    float getSalarioBase() const;
 
-    void setAnnoExp(int *annoExp);
+    void setSalarioBase(float salarioBase);
 
-    void setSalarioBase(float *salarioBase);
+    bool isBanderaRev() const;
 
-    void setBanderaRev(bool *banderaRev);
+    void setBanderaRev(bool banderaRev);
 
-    float aumentoSalario(float *);
+    float aumentoSalario(int *);
 
     void revision(bool *);
 
-    static string reporteEmpleado(float*, bool*);
+    string reporteEmpleado(float *, bool *);
 };
 
 
