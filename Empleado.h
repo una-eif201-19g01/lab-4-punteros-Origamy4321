@@ -30,6 +30,10 @@ using namespace std;
 class Empleado {
 private:
 
+    void revision(bool *);
+
+    float aumentoSalario(int *);
+
 protected:
     string empleado;
     int iD;
@@ -40,7 +44,9 @@ public:
 
     Empleado();
 
-    Empleado(const string &empleado, int iD, int annoExp, float salarioBase, bool banderaRev);
+//nota bandera e iD no entran al constructor
+
+    Empleado(const string &empleado, int annoExp, float salarioBase );
 
     const string &getEmpleado() const;
 
@@ -58,15 +64,11 @@ public:
 
     void setSalarioBase(float salarioBase);
 
-    bool isBanderaRev() const;
+    bool getBanderaRev() ;
 
     void setBanderaRev(bool banderaRev);
 
-    float aumentoSalario(int *);
-
-    void revision(bool *);
-
-    string reporteEmpleado(float *, bool *);
+    string reporteEmpleado();
 };
 
 

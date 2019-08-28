@@ -15,13 +15,20 @@
  * =====================================================================================
  */
 
+const int NUMERO_MAXIMO = 100;
 
 
+Empleado::Empleado() {
 
-Empleado::Empleado() {}
+    iD = std::rand() % NUMERO_MAXIMO;
+}
 
-Empleado::Empleado(const string &empleado, int iD, int annoExp, float salarioBase, bool banderaRev) : empleado(
-        empleado), iD(iD), annoExp(annoExp), salarioBase(salarioBase), banderaRev(banderaRev) {}
+Empleado::Empleado(const string &empleado, int annoExp, float salarioBase) : empleado(empleado), annoExp(annoExp),
+                                                                             salarioBase(salarioBase) {
+
+    iD = std::rand() % NUMERO_MAXIMO;
+
+}
 
 
 const string &Empleado::getEmpleado() const {
@@ -56,7 +63,7 @@ void Empleado::setSalarioBase(float salarioBase) {
     Empleado::salarioBase = salarioBase;
 }
 
-bool Empleado::isBanderaRev() const {
+bool Empleado::getBanderaRev()  {
     return banderaRev;
 }
 
@@ -66,29 +73,46 @@ void Empleado::setBanderaRev(bool banderaRev) {
 
 float Empleado::aumentoSalario(int *exp) {
 
-    float suma;
+    float suma = 0;
     float salario = salarioBase;
-    if(*exp == 1)
-        suma = salario +(salario * 0.02);
-    if(*exp == 2)
+    if (*exp == 1)
+        suma = salario + (salario * 0.02);
+    if (*exp == 2)
         suma = salario + (salario * 0.04);
     else
-        suma = salario + (salario *((0, 05 * *exp)));
+        if(*exp >= 3)
+        suma = salario + (salario * (0.05* *exp));
 
+    return suma;
 }
 
 void Empleado::revision(bool *banderaRev) {
 
-    int revision;
-    revision = rand() % (1);
-    if (revision == 1)
+
+    if (rand() % 2 == 0)
         *banderaRev = true;
     else
         *banderaRev = false;
+
+    setBanderaRev(*banderaRev);
 }
 
-string Empleado::reporteEmpleado(float *, bool *) {
-    return std::__cxx11::string();
+string Empleado::reporteEmpleado() {
+
+    string reporte = "";
+
+    string cambio;
+
+    if (getBanderaRev() == false) {
+        cambio = "NO";
+    } else { cambio = "SI"; }
+
+    reporte = "Empleado # [ " + to_string(getId()) + "]\n\tNombre [" + getEmpleado() + "]\n\tAños de experiencia [" +
+              to_string(getAnnoExp()) + "]\n\tSalario Inicial [" + to_string(getSalarioBase()) +
+              "]\n\tSalario Acumulado [" + to_string(aumentoSalario(&annoExp)) + "]\n\tNecesita revision [" +
+              cambio + "]\n\"";
+
+    return reporte;
 }
 
 
